@@ -1,0 +1,36 @@
+#include <gtest/gtest.h>
+#include "stringrec_utils.h"
+
+// ---------- Tests for ThirdDotIndex ----------
+TEST(ThirdDotIndexTest, ExactlyThreeDots) {
+    const char* str = "a.b.c.";
+    EXPECT_EQ(ThirdDotIndex(str), 5);
+}
+
+TEST(ThirdDotIndexTest, MoreThanThreeDots) {
+    const char* str = "a.b.c.d.e";
+    EXPECT_EQ(ThirdDotIndex(str), 5);
+}
+
+TEST(ThirdDotIndexTest, LessThanThreeDots) {
+    const char* str = "a.b";
+    EXPECT_EQ(ThirdDotIndex(str), -1);
+}
+
+// ---------- Tests for ReplaceEveryFourth ----------
+TEST(ReplaceEveryFourthTest, ShortStringNoChange) {
+    char str[] = "abc";
+    ReplaceEveryFourth(str);
+    EXPECT_STREQ(str, "abc");
+}
+
+TEST(ReplaceEveryFourthTest, ReplaceNormal) {
+    char str[] = "abcdefgh";
+    ReplaceEveryFourth(str);
+    EXPECT_STREQ(str, "abc.efg.");
+}
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
